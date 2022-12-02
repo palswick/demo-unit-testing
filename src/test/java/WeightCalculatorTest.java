@@ -8,7 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class WeightCalculatorTest {
     @Test
-    public void testOpenBaraholkaPage() {
+    public void testWeightCalculator() {
         //GIVEN
         WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver();
@@ -16,24 +16,38 @@ public class WeightCalculatorTest {
         String xpathInputName = "//input[@name='name']";
         String xpathInputHeight = "//input[@name='height']";
         String xpathInputWeight = "//input[@name='weight']";
-        String xpathInputMale = "//input[@value='male']";
-        String xpathButtonSubmit = "//button[@type='submit']";
-        String xpathResultTest = "//tbody/tr[2]/tr[2]";
+        String xpathInputMale = "//input[@value='m']";
+        String xpathButtonSubmit = "//input[@type='submit']";
+        String xpathResultText = "//tbody/tr[2]/td[2]";
         String expected = "Идеальная масса тела";
-        String xpathBaraholkaTitle = "//*[@id=\"minWidth\"]/div/div[2]/div[2]/div/div[2]/div[2]/div[1]/h1";
-        driver.get(baseUrl);
 
         //WHEN
-        WebElement elementBaraholkaLink1 = driver.findElement(By.xpath(xpathBaraholkaLink1));
-        elementBaraholkaLink1.click();
-        WebElement elementBaraholkaLink2 = driver.findElement(By.xpath(xpathBaraholkaLink2));
-        elementBaraholkaLink2.click();
-        WebElement elementBaraholkaTitle = driver.findElement(By.xpath(xpathBaraholkaTitle));
-        String actual = elementBaraholkaTitle.getText();
+        driver.get(baseUrl);
+
+        By byInputName = By.xpath(xpathInputName);
+        WebElement elementInputName = driver.findElement(byInputName);
+
+        By byInputHeight = By.xpath(xpathInputHeight);
+        WebElement elementInputHeight = driver.findElement(byInputHeight);
+
+        By byInputWeight = By.xpath(xpathInputWeight);
+        WebElement elementInputWeight = driver.findElement(byInputWeight);
+
+        By byInputMale = By.xpath(xpathInputMale);
+        WebElement elementInputMale = driver.findElement(byInputMale);
+
+        By byButtonSubmit = By.xpath(xpathButtonSubmit);
+        WebElement elementButtonSubmit = driver.findElement(byButtonSubmit);
+
+        elementInputName.sendKeys("Vasya");
+        elementInputHeight.sendKeys("180");
+        elementInputWeight.sendKeys("80");
+        elementInputMale.click();
+        elementButtonSubmit.click();
 
 
         //THEN
-        Assert.assertEquals(expected, actual);
+       // Assert.assertEquals(expected, actual);
         driver.quit();
     }
 }
