@@ -14,6 +14,8 @@ public class WeightCalculatorPage {
     String xpathButtonSubmit = "//input[@type='submit']";
     String xpathResultText = "//tbody/tr[2]/td[2]";
     String expected = "Идеальная масса тела";
+    String expected2 = "Слишком малая масса тела";
+    String expected3 = "Незначительный избыток массы тела";
 
     public WeightCalculatorPage(WebDriver driver){
         this.driver = driver;
@@ -34,7 +36,7 @@ public class WeightCalculatorPage {
         WebElement elementInputWeight = driver.findElement(byInputWeight);
         elementInputWeight.sendKeys(weight);
     }
-    public void selectGender () {
+    public void selectGender() {
         By byInputMale = By.xpath(xpathInputMale);
         WebElement elementInputMale = driver.findElement(byInputMale);
         elementInputMale.click();
@@ -50,7 +52,7 @@ public class WeightCalculatorPage {
         return elementResultText.getText();
     }
 
-    public void myMethod(String name, String height, String weight){
+    public void fillFormAndClickSubmit(String name, String height, String weight){
         typeName(name);
         typeHeight(height);
         typeWeight(weight);
