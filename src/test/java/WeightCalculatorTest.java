@@ -14,7 +14,7 @@ public class WeightCalculatorTest {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         page = new WeightCalculatorPage(driver);
-        driver.get(page.baseUrl);
+        driver.get(page.URL);
     }
     @After
     public void afterMethod(){
@@ -22,32 +22,52 @@ public class WeightCalculatorTest {
     }
 
     @Test
-    public void testWithValidData() {
+    public void testWithValidDataForIdealWeight() {
         //WHEN
         page.fillFormAndClickSubmit("Vasya", "180", "80");
         String actual = page.getResultText();
 
         //THEN
-        Assert.assertEquals(page.expected, actual);
+        Assert.assertEquals(page.RESULT_TEXT_FOR_IDEAL_WEIGHT, actual);
     }
 
     @Test
-    public void testWithValidData2() {
+    public void testWithValidDataForTooLightweight() {
         //WHEN
         page.fillFormAndClickSubmit("Vasya", "180", "40");
         String actual = page.getResultText();
 
         //THEN
-        Assert.assertEquals(page.expected2, actual);
+        Assert.assertEquals(page.RESULT_TEXT_FOR_TOO_LIGHTWEIGHT, actual);
     }
 
     @Test
-    public void testWithValidData3() {
+    public void testWithValidDataForQuiteHeavyweight() {
         //WHEN
         page.fillFormAndClickSubmit("Vasya", "180", "90");
         String actual = page.getResultText();
 
         //THEN
-        Assert.assertEquals(page.expected3, actual);
+        Assert.assertEquals(page.RESULT_TEXT_FOR_QUITE_HEAVYWEIGHT, actual);
+    }
+
+    @Test
+    public void testWithValidDataForDecentHeavyweight() {
+        //WHEN
+        page.fillFormAndClickSubmit("Vasya", "180", "100");
+        String actual = page.getResultText();
+
+        //THEN
+        Assert.assertEquals(page.RESULT_TEXT_FOR_DECENT_HEAVYWEIGHT, actual);
+    }
+
+    @Test
+    public void testWithValidDataForTooHeavyweight() {
+        //WHEN
+        page.fillFormAndClickSubmit("Vasya", "180", "110");
+        String actual = page.getResultText();
+
+        //THEN
+        Assert.assertEquals(page.RESULT_TEXT_FOR_TOO_HEAVYWEIGHT, actual);
     }
 }
